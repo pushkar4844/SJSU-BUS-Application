@@ -1,3 +1,4 @@
+import json
 from datetime import timedelta, datetime
 
 from django.contrib.auth import get_user_model
@@ -124,4 +125,16 @@ class TicketDownloadView(View):
         passengers = ticket.passengers.all()
         for passenger in passengers:
             passenger.seat_number = SeatingPlan.objects.get(ticket_passenger_id=passenger.pk).seat_number
-        return render(request, self.template_name, {'ticket': ticket})
+
+        data = {
+            'passengers': passengers,
+            'source': ticket.route.bus_route.route.source.name,
+            'destination': ticket.route.bus_route.route.destination.name,
+            'source_time': ticket.route.departure_time.strftime('%I:%M %p'),
+            'destination_time': ticket.route.arrival_time.strftime('%I:%M %p'),
+            'bus': ticket.route.bus_route.bus.name,
+            'source_date': ticket.route.departure_time.strftime("%b %d"),
+            'destination_date': ticket.route.departure_time.strftime("%b %d"),
+        }
+
+        return render(request, self.template_name, {'ticket': data})

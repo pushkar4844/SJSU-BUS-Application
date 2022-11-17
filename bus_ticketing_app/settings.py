@@ -27,35 +27,6 @@ SECRET_KEY = "django-insecure-%h8nb=_zz%%w8=$l%^3r8a)6z=uf6%-6*$-#to69y_j*8y0++4
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-EC2_PRIVATE_IP = None
-METADATA_URI = os.environ.get('ECS_CONTAINER_METADATA_URI', 'http://169.254.170.2/v2/metadata')
-
-try:
-    resp = requests.get(METADATA_URI)
-    data = resp.json()
-    # print(data)
-
-    container_name = os.environ.get('DOCKER_CONTAINER_NAME', None)
-    search_results = [x for x in data['Containers'] if x['Name'] == container_name]
-
-    if len(search_results) > 0:
-        container_meta = search_results[0]
-    else:
-        # Fall back to the pause container
-        container_meta = data['Containers'][0]
-
-    EC2_PRIVATE_IP = container_meta['Networks'][0]['IPv4Addresses'][0]
-except:
-    # silently fail as we may not be in an ECS environment
-    pass
-
-if EC2_PRIVATE_IP:
-    # Be sure your ALLOWED_HOSTS is a list NOT a tuple
-    # or .append() will fail
-    ALLOWED_HOSTS.append(EC2_PRIVATE_IP)
-# Application definition
-
-print("ALLOWED_HOSTS", ALLOWED_HOSTS)
 
 INSTALLED_APPS = [
     "rest_framework",
@@ -112,7 +83,7 @@ DATABASES = {
     }
 }
 
-# os.environ["ENV"] = "production"
+os.environ["ENV"] = "production"
 
 if os.environ.get('ENV') == 'production':
     print('Using production database')

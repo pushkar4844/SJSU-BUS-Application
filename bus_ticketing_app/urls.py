@@ -25,13 +25,12 @@ from bus_ticketing_app import settings
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
-    path('', views.health_check),
-    path('', include(api_router.urls)),
-    path('api/', include(api_router.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('auth', obtain_auth_token),
-    path('admin/', admin.site.urls),
-    path('health_check', views.health_check),
-    path('download/ticket', views.TicketDownloadView.as_view()),
-]
-              # + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+                  path('', views.health_check),
+                  path('', include(api_router.urls)),
+                  path('api/', include(api_router.urls)),
+                  path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+                  path('auth', obtain_auth_token),
+                  path('admin/', admin.site.urls),
+                  path('health_check', views.health_check),
+                  path('download/ticket', views.TicketDownloadView.as_view()),
+              ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
