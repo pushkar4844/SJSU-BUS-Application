@@ -26,7 +26,7 @@ class TicketSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Ticket
-        fields = ('type', 'price', 'quantity', 'total', 'payment', 'route', 'user', 'passengers')
+        fields = ('id', 'type', 'price', 'quantity', 'total', 'payment', 'route', 'user', 'passengers')
         read_only_fields = ('route',)
 
     def create(self, validated_data):
