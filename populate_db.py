@@ -134,3 +134,4 @@ add_bus_schedules()
 
 User.objects.create_superuser('admin', "admin@admin.com", 'admin').save()
 
+# Enhanced populate_db script
