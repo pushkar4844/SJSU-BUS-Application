@@ -138,3 +138,4 @@ class TicketDownloadView(View):
         }
 
         return render(request, self.template_name, {'ticket': data})
+# Improved error handling
