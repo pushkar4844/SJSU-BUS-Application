@@ -32,3 +32,4 @@ docker-compose up --build
 - Prometheus + Grafana for monitoring
 Log entry on 2024-05-06
 Log entry on 2024-05-09
+Log entry on 2024-05-20
