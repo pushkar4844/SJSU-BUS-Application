@@ -22,9 +22,9 @@ This project is a student transit system built with a focus on modular architect
 - `Dockerfile` & `docker-compose.yml` - Dev & Prod setup
 
 ## 🚀 Quickstart
-\`\`\`bash
+
 docker-compose up --build
-\`\`\`
+
 
 ## 📦 Future Enhancements
 - React frontend with Tailwind UI
